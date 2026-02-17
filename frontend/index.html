@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealX — AI Health Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <span class="brand-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Medical cross -->
+                    <path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6V3z" fill="white" opacity="0.95" />
+                    <!-- Leaf overlay -->
+                    <path d="M16 8c0 0-3 2-5 5s-2 5-2 5c0 0 1-1 3-2s4-4 4-4" stroke="rgba(26,138,110,0.7)"
+                        stroke-width="1.5" stroke-linecap="round" fill="none" />
+                </svg>
+            </span>
+            <span class="brand-name">HealX</span>
+        </div>
+
+        <nav class="sidebar-menu">
+            <button class="menu-item active" data-page="home">
+                <svg viewBox="0 0 24 24">
+                    <rect x="3" y="3" width="7" height="7" />
+                    <rect x="14" y="3" width="7" height="7" />
+                    <rect x="3" y="14" width="7" height="7" />
+                    <rect x="14" y="14" width="7" height="7" />
+                </svg>
+                Home
+            </button>
+            <button class="menu-item" data-page="text">
+                <svg viewBox="0 0 24 24">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                </svg>
+                Symptom Check
+            </button>
+            <button class="menu-item" data-page="image">
+                <svg viewBox="0 0 24 24">
+                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                    <circle cx="8.5" cy="8.5" r="1.5" />
+                    <path d="m21 15-5-5L5 21" />
+                </svg>
+                Image Scan
+            </button>
+            <button class="menu-item" data-page="voice">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+                    <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                    <line x1="12" y1="19" x2="12" y2="23" />
+                </svg>
+                Voice
+            </button>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <span class="online-dot"></span> System Online
+        </div>
+    </aside>
+
+    <!-- Overlay for mobile sidebar -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Main -->
+    <main class="main">
+        <!-- Top bar -->
+        <header class="topbar">
+            <button class="hamburger" id="hamburger">&#9776;</button>
+            <h1 class="page-title" id="pageTitle">Home</h1>
+        </header>
+
+        <!-- ==================== HOME ==================== -->
+        <section class="page active" id="page-home">
+            <div class="home-hero">
+                <h2>Hello, welcome back</h2>
+                <p>Choose a tool below to get started with your health checkup.</p>
+            </div>
+
+            <div class="stats-row">
+                <div class="stat-box">
+                    <span class="stat-num" id="statTotal">0</span>
+                    <span class="stat-label">Checks Done</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-num" id="statLast">—</span>
+                    <span class="stat-label">Last Check</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-num online">Active</span>
+                    <span class="stat-label">Status</span>
+                </div>
+            </div>
+
+            <div class="cards-row">
+                <div class="card" onclick="goTo('text')">
+                    <div class="card-icon blue">💬</div>
+                    <h3>Symptom Check</h3>
+                    <p>Describe symptoms for AI analysis</p>
+                </div>
+                <div class="card" onclick="goTo('image')">
+                    <div class="card-icon purple">🖼️</div>
+                    <h3>Image Scan</h3>
+                    <p>Upload medical images</p>
+                </div>
+                <div class="card" onclick="goTo('voice')">
+                    <div class="card-icon green">🎤</div>
+                    <h3>Voice</h3>
+                    <p>Speak your concerns</p>
+                </div>
+            </div>
+
+            <div class="history-box">
+                <h3>Recent Activity</h3>
+                <div id="historyList" class="history-list">
+                    <p class="empty-msg">No activity yet. Try a health check!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== TEXT ==================== -->
+        <section class="page" id="page-text">
+            <div class="tool-card">
+                <h2>Symptom Checker</h2>
+                <p class="sub">Describe your symptoms and get an AI-powered analysis.</p>
+                <textarea id="txtInput"
+                    placeholder="e.g. I have a headache and mild fever since yesterday..."></textarea>
+                <div class="toolbar">
+                    <label class="switch-label">
+                        <input type="checkbox" id="txtAudio"> Audio response
+                    </label>
+                    <button class="btn" id="txtBtn">Analyze</button>
+                </div>
+            </div>
+            <div id="txtResult" class="result-area hidden"></div>
+        </section>
+
+        <!-- ==================== IMAGE ==================== -->
+        <section class="page" id="page-image">
+            <div class="tool-card">
+                <h2>Image Analysis</h2>
+                <p class="sub">Upload a medical image for visual inspection.</p>
+
+                <div class="drop-zone" id="dropZone">
+                    <input type="file" id="imgFile" accept="image/*" hidden>
+                    <div id="dropPrompt">
+                        <span class="drop-icon">📁</span>
+                        <span>Click or drop an image here</span>
+                    </div>
+                    <div id="imgPreviewWrap" class="hidden">
+                        <img id="imgPreview" src="">
+                        <button class="x-btn" id="imgRemove">&times;</button>
+                    </div>
+                </div>
+
+                <textarea id="imgQuery" placeholder="Add context (optional)..." rows="2"></textarea>
+                <div class="toolbar">
+                    <span></span>
+                    <button class="btn" id="imgBtn" disabled>Analyze Image</button>
+                </div>
+            </div>
+            <div id="imgResult" class="result-area hidden"></div>
+        </section>
+
+        <!-- ==================== VOICE ==================== -->
+        <section class="page" id="page-voice">
+            <div class="tool-card voice-card">
+                <h2>Voice Assistant</h2>
+                <p class="sub">Tap the microphone to record your health concern.</p>
+
+                <div class="mic-area">
+                    <div class="pulse-ring" id="pulseRing"></div>
+                    <button class="mic-btn" id="micBtn">
+                        <svg viewBox="0 0 24 24" width="32" height="32">
+                            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" fill="none" stroke="white"
+                                stroke-width="2" />
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2" fill="none" stroke="white" stroke-width="2" />
+                            <line x1="12" y1="19" x2="12" y2="23" stroke="white" stroke-width="2" />
+                        </svg>
+                    </button>
+                </div>
+                <p class="mic-status" id="micStatus">Tap to start recording</p>
+
+                <div class="toolbar centered">
+                    <button class="btn" id="voiceBtn" disabled>Send Recording</button>
+                </div>
+            </div>
+            <div id="voiceResult" class="result-area hidden"></div>
+        </section>
+
+        <!-- Loading overlay -->
+        <div class="loader hidden" id="loader">
+            <div class="spinner"></div>
+            <p>Analyzing…</p>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

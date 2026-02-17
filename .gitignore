@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment variables
+.env
+.env.local
+
+# Virtual Environment
+venv/
+env/
+.venv/
+
+# Logs
+logs/
+*.log
+
+# Temporary Uploads
+temp_uploads/
+backend/static/audio/
+
+# Editor
+.vscode/
+.idea/
+
+# OS generated files
+Thumbs.db
+Desktop.ini
+.DS_Store
