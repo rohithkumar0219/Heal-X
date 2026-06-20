@@ -246,10 +246,4 @@ This is a demonstration project. For production use, additional security measure
 - Appointment scheduling
 - Symptom tracking
 
-## 📞 Support
-
-For issues or questions, please refer to the API documentation or check the application logs.
-
----
-
 **Remember**: This is an educational tool. Always consult healthcare professionals for medical advice.
