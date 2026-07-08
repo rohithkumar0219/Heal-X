@@ -20,8 +20,8 @@ A full-stack AI-powered healthcare assistant that combines text, image, and voic
 ### Backend
 - **Framework**: FastAPI (Python)
 - **AI Models**:
-  - GPT-4 Turbo for medical query processing
-  - GPT-4 Vision for medical image analysis
+  - llma 4 Turbo for medical query processing
+  - llma 4 Vision for medical image analysis
   - Whisper for speech-to-text
   - gTTS for text-to-speech
 
