@@ -1,4 +1,4 @@
-name: Experience Loop CI
+name: Heal-X CI
 
 on:
   push:
