@@ -1,20 +1,15 @@
-from fastapi import APIRouter, UploadFile, File, Form, HTTPException
-from fastapi.responses import FileResponse
-from typing import Optional
-import json
-
-from models.schemas import (
+from backend.models.schemas import (
     TextQueryRequest,
     HealthResponse,
     ErrorResponse,
     PossibleCondition
 )
-from services.llm_service import llm_service
-from services.vision_service import vision_service
-from services.speech_service import speech_service
-from services.tts_service import tts_service
-from utils.file_handler import file_handler
-from utils.logger import logger
+from backend.services.llm_service import llm_service
+from backend.services.vision_service import vision_service
+from backend.services.speech_service import speech_service
+from backend.services.tts_service import tts_service
+from backend.utils.file_handler import file_handler
+from backend.utils.logger import logger
 
 router = APIRouter(prefix="/api", tags=["health"])
 
